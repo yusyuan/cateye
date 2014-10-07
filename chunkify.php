@@ -1,13 +1,15 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
+
 $word = $_POST['word'];
 $number = $_POST['number'];
 
 $chunks = ceil(strlen($word) / $number);
 
-echo "The {$number}-letter chunks of '{$word}' are:<br />\n";
+echo "由{$number}個單位來分 '{$word}' 單字：<br />\n";
 
 for ($i = 0; $i<$chunks; $i++)
 {
-	$chunks=substr($word, $i * $number, $number);
-	printf("%d: %s<br />\n", $i+1, $chunks);
+	$chunk=substr($word, $i * $number, $number);
+	printf("%d： %s<br />\n", $i+1, $chunk);
 }
