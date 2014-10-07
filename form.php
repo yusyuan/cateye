@@ -4,9 +4,9 @@
   <title>Personalizd Greeting Form</title>
   </head>
   <!--輸入名字出現歡迎訊息-->
-
+<!--輸入名字出現歡迎訊息-->
   <body>
-
+  
     <?php 
       if(!empty($_POST['name']))
       {
