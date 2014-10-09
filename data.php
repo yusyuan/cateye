@@ -4,10 +4,9 @@ trait Logger
 	public function log($logString)
 	{
 		$className = __CLASS__;
-		echo date("Y-m-d h:i.s", time()). ": [{$className}] {$logString}";
+		echo date("Y-m-d h:i:s", time()) . ": [{$className}] {$logString}";
 	}
 }
-echo $user;
 class  User
 {
 	use Logger;
@@ -30,12 +29,12 @@ class UserGroup
 	use Logger;
 	
 	public $users = array();
-	public function addUser(user $user)
+	public function addUser(User $user)
 	{
 		if (!$this->includesUser($user))
 		{
 			$this->users[]=$user;
-			echo ($this->log("Added user '{$user}' to group"));
+			$this->log("Added user '{$user}' to group");
 		}
 	}
 }
