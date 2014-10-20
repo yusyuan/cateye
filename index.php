@@ -10,8 +10,8 @@
 -->
 
 <body>
-
-<form id="form1" name="form1" method="POST" action="login.php">
+<!--action可傳login.php, index3.php-->
+<form id="form1" name="form1" method="POST" action="index3.php">
     <table width="250" border="3" align="left">
         <tr>
             <td width="40">帳號</td>

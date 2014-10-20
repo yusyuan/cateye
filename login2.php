@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD']=="GET")
            echo json_encode($a);
         }else
         {
-           $a=[array("retcode"=>"0", "rescode"=>"t001001", "resmsg"=>"密碼錯誤", "resdata"=>[array("IP"=>"$ip")])];
+           $a=[array("retcode"=>"0", "rescode"=>"t001001", "resmsg"=>"密碼錯誤1", "resdata"=>[array("IP"=>"$ip")])];
            echo json_encode($a);
         }
     }else
