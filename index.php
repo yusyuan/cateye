@@ -7,6 +7,7 @@
 
 <!-- 作業一，登入畫面使用POST or GET傳送，
 	 傳送帳號.密碼.語系.使用者IP。
+	 作業四，增加頁數欄位。
 -->
 
 <body>
@@ -22,10 +23,14 @@
             <td><input name="passwd" type="password" size="20"></td>
         </tr>
         <tr>
-            <td ><Select Name="language" onchange="funChgCountry(this.value);">
-            <option value="繁體中文">繁體中文</Option>
-            <option value="簡體中文">簡體中文</Option>
-            <option value="英文">英文</Option>
+            <td><Select Name="language" >
+            <option value="1">繁體中文</Option>
+            <option value="2">简体中文</Option>
+            <option value="3">English</Option>
+            </Select></td>
+            <td><Select Name="page" >
+            <option value="yes">開啟分頁</Option>
+            <option value="no">不開啟分頁</Option>
             </Select></td>
         </tr>
         <tr>

@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD']!="GET")
     $passwd=$_POST['passwd'];
     $language=$_POST['language'];
     $userip=$_POST['userip'];
-    $fields=json_encode(array("uid"=>"$uid","passwd"=>"$passwd","language"=>"$language","userip"=>"$userip" ));
+    $page=$_POST['page'];
+    $fields=json_encode(array("uid"=>"$uid", "passwd"=>"$passwd", "language"=>"$language", "userip"=>"$userip", "page"=>"$page"));
     $ch=curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -30,7 +31,8 @@ else
     $passwd=$_GET['passwd'];
     $language=$_GET['language'];
     $userip=$_GET['userip'];
-    $fields=json_encode(array("uid"=>"$uid","passwd"=>"$passwd","language"=>"$language","userip"=>"$userip" ));
+    $page=$_GET['page'];
+    $fields=json_encode(array("uid"=>"$uid", "passwd"=>"$passwd", "language"=>"$language", "userip"=>"$userip", "page"=>"$page"));
     $ch=curl_init();
     curl_setopt($ch, CURLOPT_URL, "$url"."?"."data=$fields");
     curl_exec($ch);
