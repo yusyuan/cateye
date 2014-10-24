@@ -11,9 +11,8 @@ $db = @mysql_select_db("test");
 /* 作業四，
    輸出改為副程式，副程式判斷resdata, 資料為JSON輸出。 function Message()
    使用代碼找出訊息帶入，開txt檔。function txt()
-   多國語言帶入， 頁數筆數顯示
+   多國語言帶入
 */
-
 function txt($ex,$language)
 {
     /*開檔*/
@@ -38,69 +37,15 @@ function txt($ex,$language)
 	fclose($fp);
 }
 
-function Message($one,$two,$three,$qdata,$page)
+function Message($one,$two,$three,$qdata)
 {
-    //預設每頁筆數
-    $pageRow_records = 3;
-    //預設頁數
-    $num_pages = 1;
-    //若已經有翻頁，將頁數更新
-    if (isset($_GET['page']))
-    {
-      $num_pages = $_GET['page'];
-    }
-    //本頁開始記錄筆數 = (頁數-1)*每頁記錄筆數
-    $startRow_records = ($num_pages -1) * $pageRow_records;
-    //未加限制顯示筆數的SQL敘述句
-    $query_RecMember = "SELECT * FROM `people` ";
-    //加上限制顯示筆數的SQL敘述句，由本頁開始記錄筆數開始，每頁顯示預設筆數
-    $query_limit_RecMember = $query_RecMember." LIMIT ".$startRow_records.", ".$pageRow_records;
-    //以加上限制顯示筆數的SQL敘述句查詢資料到 $resultMember 中
-    $RecMember = mysql_query($query_limit_RecMember);
-    //以未加上限制顯示筆數的SQL敘述句查詢資料到 $all_resultMember 中
-    $all_RecMember = mysql_query($query_RecMember);
-    //計算總筆數
-    $total_records = mysql_num_rows($all_RecMember);
-    //計算總頁數=(總筆數/每頁筆數)後無條件進位。
-    $total_pages = ceil($total_records/$pageRow_records);
-    if ($num_pages < $total_pages)
-    {
-        $next_page=$num_pages+1;
-    }else
-    {
-        $next_page=$num_pages;
-    }
-    if ($num_pages>1)
-    {
-        $pre_pages=$num_pages-1;
-    }else
-    {
-        $pre_pages=$num_pages;
-    }
-
 	if ($qdata != NULL)
 	{
-	    if ($page == "yes")
-        {
-		    $a=[array(
-				    "retcode"=>"$one",
-				    "rescode"=>"$two",
-				    "resmsg" =>"$three",
-				    "nextpage"=>"$next_page",
-				    "nowpage"=>"$num_pages",
-				    "pagecnt"=>"$total_pages",
-				    "pagerow"=>"$pageRow_records",
-				    "prepage"=>"$pre_pages",
-				    "rowcnt"=>"$total_records",
-				    "resdata"=>[$qdata])];
-	    }else
-	    {
-		    $a=[array(
-				    "retcode"=>"$one",
-				    "rescode"=>"$two",
-				    "resmsg" =>"$three",
-				    "resdata"=>[$qdata])];
-	    }
+		$a=[array(
+				"retcode"=>"$one",
+				"rescode"=>"$two",
+				"resmsg" =>"$three",
+				"resdata"=>[$qdata])];
 	}else 
 	{
 		$a=[array(
@@ -110,6 +55,7 @@ function Message($one,$two,$three,$qdata,$page)
 				)];
 	}
 	echo json_encode($a);
+
 }
 
 if ($_SERVER['REQUEST_METHOD']!="GET")
@@ -125,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD']!="GET")
     $type=$s2['restype'];
     $ip=$a['userip'];
     $language=$a['language'];
-    $page=$a['page'];
 
 //    $b="SELECT * FROM `Message` WHERE `Mid`='".$ex."'";
 
@@ -133,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD']!="GET")
     {
         if ($a['passwd']==$passwd)
         {
-        	Message("1",$ex="t001000",txt($ex,$language), array("IP"=>"$ip","name"=>"$name","language"=>"$language"), $page);
+        	Message("1",$ex="t001000",txt($ex,$language), array("IP"=>"$ip","name"=>"$name","language"=>"$language"));
         }else
         {
         	Message("0",$ex="t001001",txt($ex,$language),array("IP"=>"$ip"));
@@ -159,13 +104,12 @@ if ($_SERVER['REQUEST_METHOD']!="GET")
    $type=$s2['restype'];
    $language=$a['language'];
    $ip=$a['userip'];
-   $page=$a['page'];
 
      if ($a['uid']==$s2['Uid'] && $a['uid']!="")
      {
         if ($a['passwd']==$passwd)
         {
-        	Message("1",$ex="t001000",txt($ex,$language,$page),array("IP"=>"$ip","name"=>"$name","language"=>"$language"), $page);
+        	Message("1",$ex="t001000",txt($ex,$language),array("IP"=>"$ip","name"=>"$name","language"=>"$language"));
         }else
         {
         	Message("0",$ex="t001001",txt($ex,$language),array("IP"=>"$ip"));

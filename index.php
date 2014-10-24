@@ -7,12 +7,14 @@
 
 <!-- 作業一，登入畫面使用POST or GET傳送，
 	 傳送帳號.密碼.語系.使用者IP。
-	 作業四，增加頁數欄位。
+	 作業四，中間頁面接收處理傳送後台。 index3.php
+	 作業五，送出後轉到搜尋頁面。 index4.php
+	                →避免GET直連，從此頁開始使用cookie、session紀錄。.php
 -->
 
 <body>
-<!--action可傳login.php, index3.php-->
-<form id="form1" name="form1" method="POST" action="index3.php">
+<!--action可傳login.php, index3.php, index4.php-->
+<form id="form1" name="form1" method="POST" action="index4.php">
     <table width="250" border="3" align="left">
         <tr>
             <td width="40">帳號</td>
@@ -27,10 +29,6 @@
             <option value="1">繁體中文</Option>
             <option value="2">简体中文</Option>
             <option value="3">English</Option>
-            </Select></td>
-            <td><Select Name="page" >
-            <option value="yes">開啟分頁</Option>
-            <option value="no">不開啟分頁</Option>
             </Select></td>
         </tr>
         <tr>
